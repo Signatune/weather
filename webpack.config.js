@@ -11,7 +11,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "New Project",
+      title: "Weather",
+      template: "src/test.html",
     }),
   ],
   module: {
