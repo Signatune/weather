@@ -44,11 +44,13 @@ function createForecastDay(dayInfo) {
   upcoming.appendChild(clone);
 }
 
+function handleWeatherFetch(forecastJSON) {
+  const current = weatherAPI.parseCurrentWeather(forecastJSON);
+  const forecast = weatherAPI.parseForecast(forecastJSON);
+  updateCurrentDisplay(current);
+  forecast.forEach((dayInfo) => createForecastDay(dayInfo));
+}
+
 fetchButton.addEventListener("click", () => {
-  weatherAPI.fetchForecast(getCityValue(), 7).then((forecastJSON) => {
-    const current = weatherAPI.parseCurrentWeather(forecastJSON);
-    const forecast = weatherAPI.parseForecast(forecastJSON);
-    updateCurrentDisplay(current);
-    forecast.forEach((dayInfo) => createForecastDay(dayInfo));
-  });
+  weatherAPI.fetchForecast(getCityValue(), 7).then(handleWeatherFetch);
 });
