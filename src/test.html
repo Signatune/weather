@@ -6,7 +6,44 @@
     <title>Document</title>
   </head>
   <body>
-    <p>This is only a test</p>
-    <button>Launch the nukes</button>
+    <p>Enter city</p>
+    <input type="text" name="city" id="city" />
+    <button id="fetch">Log Forecast</button>
+
+    <div class="current">
+      <h2>Current Weather</h2>
+      <div class="date">
+        <h3></h3>
+      </div>
+      <div class="temperature">
+        <p class="current"></p>
+      </div>
+      <div class="condition">
+        <img src="" alt="" />
+        <p></p>
+      </div>
+      <div class="precipitation">
+        <h4></h4>
+      </div>
+    </div>
+
+    <div class="upcoming">
+      <h3>Upcoming Forecast</h3>
+    </div>
+
+    <template class="forecast-day">
+      <div class="forecast">
+        <h3 class="date"></h3>
+        <div class="temps">
+          <p class="high">High: <span></span> F</p>
+          <p class="low">Low: <span></span> F</p>
+        </div>
+        <div class="condition">
+          <img src="" alt="" />
+          <p></p>
+        </div>
+        <p class="rainChance"><span></span>% chance of rain</p>
+      </div>
+    </template>
   </body>
 </html>
