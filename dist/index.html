@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  <script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
+  <body>
+    <input type="text" name="city" id="city" placeholder="Enter city..." />
+    <button id="fetch">Get Forecast</button>
+    <button id="temperature-toggle">Toggle F/C</button>
+
+    <div class="current">
+      <h2>Current Weather</h2>
+      <div class="date">
+        <h3></h3>
+      </div>
+      <div class="forecast-display">
+        <div class="condition">
+          <img src="" alt="" />
+          <p></p>
+        </div>
+        <div class="temperature">
+          <p class="current"></p>
+        </div>
+        <div class="additional-data">
+          <div class="precipitation">
+            <p></p>
+          </div>
+          <div class="humidity">
+            <p></p>
+          </div>
+          <div class="cloud">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="upcoming">
+      <h3>Upcoming Forecast</h3>
+      <div class="days"></div>
+    </div>
+
+    <template class="forecast-day">
+      <div class="forecast">
+        <h3 class="date"></h3>
+        <div class="temps">
+          <p class="high">High: <span></span></p>
+          <p class="low">Low: <span></span></p>
+        </div>
+        <div class="condition">
+          <img src="" alt="" />
+          <p></p>
+        </div>
+        <p class="rainChance"><span></span>% chance of rain</p>
+      </div>
+    </template>
+  </body>
+</html>
