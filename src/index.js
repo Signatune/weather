@@ -1,5 +1,6 @@
-import * as weatherAPI from "./weather-api.js";
 import { format } from "date-fns";
+import * as weatherAPI from "./weather-api";
+import "./style.css";
 
 const fetchButton = document.getElementById("fetch");
 
@@ -16,7 +17,7 @@ function updateCurrentDisplay(currentWeather) {
   const precip = current.querySelector(".precipitation");
 
   date.textContent = format(currentWeather.date, "PPP");
-  currentTemp.textContent = `Current Temperature: ${currentWeather.currentTemp} F`;
+  currentTemp.textContent = `${currentWeather.currentTemp}° F`;
   conditionImg.src = currentWeather.icon;
   conditionText.textContent = currentWeather.text;
   precip.textContent = `${currentWeather.precip} inches precipitation`;
@@ -40,7 +41,7 @@ function createForecastDay(dayInfo) {
   conditionText.textContent = dayInfo.condition.text;
   rainChance.textContent = dayInfo.rainChance;
 
-  const upcoming = document.querySelector(".upcoming");
+  const upcoming = document.querySelector(".upcoming>.days");
   upcoming.appendChild(clone);
 }
 
