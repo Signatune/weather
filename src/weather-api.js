@@ -19,6 +19,7 @@ function parseCurrentWeather(forecastJSON) {
   };
   const { text, icon } = currentData.condition;
   const precip = currentData.precip_in;
+  const { humidity, cloud } = currentData;
 
   return {
     date,
@@ -26,6 +27,8 @@ function parseCurrentWeather(forecastJSON) {
     text,
     icon,
     precip,
+    humidity,
+    cloud,
   };
 }
 

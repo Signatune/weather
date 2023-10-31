@@ -17,7 +17,9 @@ function updateCurrentDisplay(currentWeather) {
   const currentTemp = current.querySelector(".temperature>.current");
   const conditionImg = current.querySelector(".condition>img");
   const conditionText = current.querySelector(".condition>p");
-  const precip = current.querySelector(".precipitation");
+  const precip = current.querySelector(".precipitation>p");
+  const humidity = current.querySelector(".humidity>p");
+  const cloud = current.querySelector(".cloud>p");
 
   date.textContent = format(currentWeather.date, "PPP");
   if (displayFahrenheit) {
@@ -28,6 +30,8 @@ function updateCurrentDisplay(currentWeather) {
   conditionImg.src = currentWeather.icon;
   conditionText.textContent = currentWeather.text;
   precip.textContent = `${currentWeather.precip} inches precipitation`;
+  humidity.textContent = `${currentWeather.humidity}% humidity`;
+  cloud.textContent = `${currentWeather.cloud}% cloud cover today`;
 }
 
 function createForecastDay(dayInfo) {
