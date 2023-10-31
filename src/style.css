@@ -1,6 +1,7 @@
 body {
   background: lightblue;
   font-family: arial;
+  color: #00626f;
 }
 
 .forecast-display {
@@ -9,6 +10,9 @@ body {
   grid-template-rows: 1fr 1fr;
   column-gap: 50px;
   justify-items: center;
+  border: 3px white solid;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .condition {
