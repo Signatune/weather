@@ -41,15 +41,17 @@ function createForecastDay(dayInfo) {
   conditionText.textContent = dayInfo.condition.text;
   rainChance.textContent = dayInfo.rainChance;
 
-  const upcoming = document.querySelector(".upcoming>.days");
-  upcoming.appendChild(clone);
+  return clone;
 }
 
 function handleWeatherFetch(forecastJSON) {
   const current = weatherAPI.parseCurrentWeather(forecastJSON);
   const forecast = weatherAPI.parseForecast(forecastJSON);
+  const upcoming = document.querySelector(".upcoming>.days");
   updateCurrentDisplay(current);
-  forecast.forEach((dayInfo) => createForecastDay(dayInfo));
+  upcoming.replaceChildren(
+    ...forecast.map((dayInfo) => createForecastDay(dayInfo)),
+  );
 }
 
 fetchButton.addEventListener("click", () => {
