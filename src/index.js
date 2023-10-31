@@ -3,6 +3,9 @@ import * as weatherAPI from "./weather-api";
 import "./style.css";
 
 const fetchButton = document.getElementById("fetch");
+const tempToggle = document.getElementById("temperature-toggle");
+let weatherData = weatherAPI.fetchForecast("Boston", 7);
+let displayFahrenheit = true;
 
 function getCityValue() {
   return document.getElementById("city").value;
@@ -17,7 +20,11 @@ function updateCurrentDisplay(currentWeather) {
   const precip = current.querySelector(".precipitation");
 
   date.textContent = format(currentWeather.date, "PPP");
-  currentTemp.textContent = `${currentWeather.currentTemp}° F`;
+  if (displayFahrenheit) {
+    currentTemp.textContent = `${currentWeather.currentTemp.fahrenheit}° F`;
+  } else {
+    currentTemp.textContent = `${currentWeather.currentTemp.celsius}° C`;
+  }
   conditionImg.src = currentWeather.icon;
   conditionText.textContent = currentWeather.text;
   precip.textContent = `${currentWeather.precip} inches precipitation`;
@@ -35,8 +42,13 @@ function createForecastDay(dayInfo) {
   const rainChance = clone.querySelector(".rainChance>span");
 
   date.textContent = format(dayInfo.date, "EEEE");
-  hiTemp.textContent = dayInfo.high;
-  lowTemp.textContent = dayInfo.low;
+  if (displayFahrenheit) {
+    hiTemp.textContent = `${dayInfo.high.fahrenheit}° F`;
+    lowTemp.textContent = `${dayInfo.low.fahrenheit}° F`;
+  } else {
+    hiTemp.textContent = `${dayInfo.high.celsius}° C`;
+    lowTemp.textContent = `${dayInfo.low.celsius}° C`;
+  }
   conditionIcon.src = dayInfo.condition.icon;
   conditionText.textContent = dayInfo.condition.text;
   rainChance.textContent = dayInfo.rainChance;
@@ -54,6 +66,14 @@ function handleWeatherFetch(forecastJSON) {
   );
 }
 
+weatherData.then(handleWeatherFetch);
+
 fetchButton.addEventListener("click", () => {
-  weatherAPI.fetchForecast(getCityValue(), 7).then(handleWeatherFetch);
+  weatherData = weatherAPI.fetchForecast(getCityValue(), 7);
+  weatherData.then(handleWeatherFetch);
+});
+
+tempToggle.addEventListener("click", () => {
+  displayFahrenheit = !displayFahrenheit;
+  weatherData.then(handleWeatherFetch);
 });

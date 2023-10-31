@@ -13,7 +13,10 @@ function parseCurrentWeather(forecastJSON) {
   const currentData = forecastJSON.current;
 
   const date = new Date(currentData.last_updated);
-  const currentTemp = currentData.temp_f;
+  const currentTemp = {
+    fahrenheit: Math.floor(currentData.temp_f),
+    celsius: Math.floor(currentData.temp_c),
+  };
   const { text, icon } = currentData.condition;
   const precip = currentData.precip_in;
 
@@ -31,8 +34,14 @@ function parseForecast(forecastJSON) {
     const dayData = day.day;
     return {
       date: new Date(day.date),
-      high: dayData.maxtemp_f,
-      low: dayData.mintemp_f,
+      high: {
+        fahrenheit: Math.floor(dayData.maxtemp_f),
+        celsius: Math.floor(dayData.maxtemp_c),
+      },
+      low: {
+        fahrenheit: Math.floor(dayData.mintemp_f),
+        celsius: Math.floor(dayData.mintemp_c),
+      },
       condition: {
         icon: dayData.condition.icon,
         text: dayData.condition.text,
