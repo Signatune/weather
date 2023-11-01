@@ -82,7 +82,6 @@ function handleWeatherFetch(forecastJSON) {
   const current = document.querySelector(".current");
 
   current.replaceChildren(createCurrentDisplay(currentData));
-
   upcoming.replaceChildren(
     ...forecastData.map((dayInfo) => createForecastDay(dayInfo)),
   );
