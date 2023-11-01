@@ -11,15 +11,28 @@ function getCityValue() {
   return document.getElementById("city").value;
 }
 
-function updateCurrentDisplay(currentWeather) {
-  const current = document.querySelector(".current");
-  const date = current.querySelector(".date>h3");
-  const currentTemp = current.querySelector(".temperature>.current");
-  const conditionImg = current.querySelector(".condition>img");
-  const conditionText = current.querySelector(".condition>p");
-  const precip = current.querySelector(".precipitation>p");
-  const humidity = current.querySelector(".humidity>p");
-  const cloud = current.querySelector(".cloud>p");
+function addLoadingSpinner() {
+  const current = document.querySelector("div.current>.forecast-display");
+  const upcoming = document.querySelector(".upcoming>.days");
+
+  const spinner = document.createElement("div");
+  spinner.classList.add("lds-dual-ring");
+
+  current.replaceChildren(spinner);
+  upcoming.replaceChildren(spinner.cloneNode(true));
+}
+
+function createCurrentDisplay(currentWeather) {
+  const template = document.querySelector("template.forecast-display");
+  const newDisplay = template.content.cloneNode(true);
+
+  const date = newDisplay.querySelector(".date>h3");
+  const currentTemp = newDisplay.querySelector(".temperature>.current");
+  const conditionImg = newDisplay.querySelector(".condition>img");
+  const conditionText = newDisplay.querySelector(".condition>p");
+  const precip = newDisplay.querySelector(".precipitation>p");
+  const humidity = newDisplay.querySelector(".humidity>p");
+  const cloud = newDisplay.querySelector(".cloud>p");
 
   date.textContent = format(currentWeather.date, "PPP");
   if (displayFahrenheit) {
@@ -32,6 +45,8 @@ function updateCurrentDisplay(currentWeather) {
   precip.textContent = `${currentWeather.precip} inches precipitation`;
   humidity.textContent = `${currentWeather.humidity}% humidity`;
   cloud.textContent = `${currentWeather.cloud}% cloud cover today`;
+
+  return newDisplay;
 }
 
 function createForecastDay(dayInfo) {
@@ -61,18 +76,22 @@ function createForecastDay(dayInfo) {
 }
 
 function handleWeatherFetch(forecastJSON) {
-  const current = weatherAPI.parseCurrentWeather(forecastJSON);
-  const forecast = weatherAPI.parseForecast(forecastJSON);
+  const currentData = weatherAPI.parseCurrentWeather(forecastJSON);
+  const forecastData = weatherAPI.parseForecast(forecastJSON);
   const upcoming = document.querySelector(".upcoming>.days");
-  updateCurrentDisplay(current);
+  const current = document.querySelector(".current");
+
+  current.replaceChildren(createCurrentDisplay(currentData));
+
   upcoming.replaceChildren(
-    ...forecast.map((dayInfo) => createForecastDay(dayInfo)),
+    ...forecastData.map((dayInfo) => createForecastDay(dayInfo)),
   );
 }
 
 weatherData.then(handleWeatherFetch);
 
 fetchButton.addEventListener("click", () => {
+  addLoadingSpinner();
   weatherData = weatherAPI.fetchForecast(getCityValue(), 7);
   weatherData.then(handleWeatherFetch);
 });
