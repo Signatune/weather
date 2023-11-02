@@ -1,14 +1,14 @@
-# Vanilla JS Web App Template
+# Weather App
 
-This repo serves as a starting template for web development projects for my work
-following the [Odin Project](https://www.theodinproject.com/) free curriculum
+This app is a weather display that consumes the [Weather API](https://www.weatherapi.com/). You can input any city to get the current weather and the forecast for the week to come.
 
-## What's Inside
+## Live Demo
 
-Currently this template is configured to use several tools and technologies
-that I have found useful for efficient development. They are:
+[Weather App](https://signatune.github.io/weather/)
 
-- Webpack
-- ESLint (Configured to use the [AirBNB Style Guide](https://github.com/airbnb/javascript)
-- Prettier
-- Babel (using babel-loader and @babel/preset-env)
+## Installation and How to Run Locally
+
+```
+npm i
+npm run start
+```
