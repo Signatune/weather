@@ -6,12 +6,17 @@
     <title>Weather</title>
   <script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
   <body>
-    <input type="text" name="city" id="city" placeholder="Enter city..." />
-    <button id="fetch">Get Forecast</button>
-    <button id="temperature-toggle">Toggle F/C</button>
+    <header>
+      <input type="text" name="city" id="city" placeholder="Enter city..." />
+      <button id="fetch">Get Forecast</button>
+      <button id="temperature-toggle">Toggle F/C</button>
+    </header>
 
     <div class="current">
       <h2>Current Weather</h2>
+    </div>
+
+    <template class="forecast-display start" style="display: none">
       <div class="date">
         <h3></h3>
       </div>
@@ -35,7 +40,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </template>
 
     <div class="upcoming">
       <h3>Upcoming Forecast</h3>
