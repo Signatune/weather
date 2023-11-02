@@ -91,15 +91,25 @@ function handleWeatherFetch(forecastJSON) {
   );
 }
 
-weatherData.then(handleWeatherFetch);
+function handleFetchError(err) {
+  console.error(err);
+  const errorMessage = document.createElement("h2");
+  errorMessage.textContent = "Forecast Not Found :(";
+  const current = document.querySelector("div.current>.forecast-display");
+  const forecast = document.querySelector(".days");
+  current.replaceChildren(errorMessage);
+  forecast.replaceChildren();
+}
+
+weatherData.then(handleWeatherFetch).catch(handleFetchError);
 
 fetchButton.addEventListener("click", () => {
   addLoadingSpinner();
   weatherData = weatherAPI.fetchForecast(getCityValue(), 7);
-  weatherData.then(handleWeatherFetch);
+  weatherData.then(handleWeatherFetch).catch(handleFetchError);
 });
 
 tempToggle.addEventListener("click", () => {
   displayFahrenheit = !displayFahrenheit;
-  weatherData.then(handleWeatherFetch);
+  weatherData.then(handleWeatherFetch).catch(handleFetchError);
 });
