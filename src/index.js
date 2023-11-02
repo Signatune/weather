@@ -19,6 +19,8 @@ function addLoadingSpinner() {
   spinner.classList.add("lds-dual-ring");
 
   current.replaceChildren(spinner);
+  upcoming.classList.add("center");
+  upcoming.classList.remove("start");
   upcoming.replaceChildren(spinner.cloneNode(true));
 }
 
@@ -82,6 +84,8 @@ function handleWeatherFetch(forecastJSON) {
   const current = document.querySelector(".current");
 
   current.replaceChildren(createCurrentDisplay(currentData));
+  upcoming.classList.add("start");
+  upcoming.classList.remove("center");
   upcoming.replaceChildren(
     ...forecastData.map((dayInfo) => createForecastDay(dayInfo)),
   );

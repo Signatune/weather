@@ -77,6 +77,14 @@ body {
   }
 }
 
-.forecast-days > .lds-dual-ring {
-  align-self: center;
+.start {
+  justify-content: start;
+}
+
+.center {
+  justify-content: center;
+}
+
+.upcoming > h3 {
+  text-align: center;
 }
